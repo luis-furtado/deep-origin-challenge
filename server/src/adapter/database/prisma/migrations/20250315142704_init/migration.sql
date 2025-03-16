@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Url" ALTER COLUMN "deletedAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL;

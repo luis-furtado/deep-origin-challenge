@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:15-alpine
+    container_name: shortener-database
+    restart: always
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: 123123
+      POSTGRES_DB: shortener
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: shortener-service
+    restart: always
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgresql://dbuser:123123@database:5432/shortener
+    ports:
+      - "4000:4000"
+    command: ["/bin/sh", "-c", "until pg_isready -h database -U dbuser; do sleep 2; done && npx prisma migrate deploy --schema=./src/adapter/database/prisma/schema.prisma && node ./src/adapter/api/server.js"]
+
+volumes:
+  pgdata:
