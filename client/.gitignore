@@ -31,6 +31,6 @@ prisma/migrations/
 .DS_Store
 
 # build
-public/
-build/
-.react-router/types/
+public/*
+build
+.react-router/
