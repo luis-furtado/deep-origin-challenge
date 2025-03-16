@@ -11,13 +11,7 @@ This is the **Node.js backend** for the URL shortener application. It provides A
 
 ## 🚀 Running the Server with Docker
 
-### 1️⃣ **Build the Docker Image**
-
-```bash
-docker build -t shortener-service .
-```
-
-### 2️⃣ **Running Everything with Docker Compose**
+### **Running Everything with Docker Compose (Server and Database)**
 
 ```bash
 docker compose up --build
