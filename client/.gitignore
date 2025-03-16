@@ -29,3 +29,8 @@ prisma/migrations/
 .vscode/
 .idea/
 .DS_Store
+
+# build
+public/
+build/
+.react-router/types/

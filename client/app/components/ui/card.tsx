@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -8,6 +8,6 @@ export function Card({ children, className }: { children: ReactNode; className?:
   );
 }
 
-export function CardContent({ children, className }: { children: ReactNode, className?: string }) {
-    return <div className={`p-2 ${className}`}>{children}</div>;
-  }
+export function CardContent({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={`p-2 ${className}`}>{children}</div>;
+}

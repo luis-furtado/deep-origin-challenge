@@ -1,40 +1,39 @@
-import { useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Copy, Check } from "lucide-react";
-import axios from "axios";
+import { useState } from 'react';
+import { Card, CardContent } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Copy, Check } from 'lucide-react';
+import axios from 'axios';
 
 const SERVER_LOCALHOST_BASEURL: string = 'http://localhost:4000/';
 
 export default function URLShortener() {
-  const [originalUrl, setOriginalUrl] = useState("");
-  const [shortUrl, setShortUrl] = useState("");
+  const [originalUrl, setOriginalUrl] = useState('');
+  const [shortUrl, setShortUrl] = useState('');
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
 
   const handleShorten = async () => {
     setIsSubmitting(true);
     if (!originalUrl) {
-      setError("Please enter a valid URL");
+      setError('Please enter a valid URL');
       return;
     }
     try {
-      const response = await axios.post("http://localhost:4000/shorten", {
+      const response = await axios.post('http://localhost:4000/shorten', {
         url: originalUrl,
       });
       setShortUrl(`${SERVER_LOCALHOST_BASEURL}${response.data.shortUrl.slug}`);
-      setError("");
+      setError('');
     } catch (err: any) {
-    if (err.response.data.error === 'Invalid URL') {
-      setError("The URL is invalid. Please, give a correct URL format.");
-    } else if (err.response.data.includes('Entity already exists')) {
-      setError("Failed to shorten URL. The URL already exists.");
-    } else {
-      setError("Failed to shorten URL. Please try again.");
-    }
+      if (err.response.data.error === 'Invalid URL') {
+        setError('The URL is invalid. Please, give a correct URL format.');
+      } else if (err.response.data.includes('Entity already exists')) {
+        setError('Failed to shorten URL. The URL already exists.');
+      } else {
+        setError('Failed to shorten URL. Please try again.');
+      }
     }
   };
 
@@ -52,10 +51,14 @@ export default function URLShortener() {
         <Input
           placeholder="Enter URL"
           value={originalUrl}
-          onChange={(e) => { setOriginalUrl(e.target.value), setIsSubmitting(false), setError('')}}
+          onChange={(e) => {
+            setOriginalUrl(e.target.value), setIsSubmitting(false), setError('');
+          }}
           className="mb-6 text-black w-full"
         />
-        <Button onClick={handleShorten} disabled={isSubmitting} className="w-full text-gray">Shorten</Button>
+        <Button onClick={handleShorten} disabled={isSubmitting} className="w-full text-gray">
+          Shorten
+        </Button>
         {error && <p className="text-red-500 mt-2">{error}</p>}
         {shortUrl && (
           <CardContent className="mt-4 flex justify-between items-center border p-2 rounded">
