@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   database:
@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: 123123
       POSTGRES_DB: shortener
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -23,8 +23,13 @@ services:
     environment:
       DATABASE_URL: postgresql://dbuser:123123@database:5432/shortener
     ports:
-      - "4000:4000"
-    command: ["/bin/sh", "-c", "until pg_isready -h database -U dbuser; do sleep 2; done && npx prisma migrate deploy --schema=./src/adapter/database/prisma/schema.prisma && node ./src/adapter/api/server.js"]
+      - '4000:4000'
+    command:
+      [
+        '/bin/sh',
+        '-c',
+        'until pg_isready -h database -U dbuser; do sleep 2; done && npx prisma migrate deploy --schema=./src/adapter/database/prisma/schema.prisma && node ./src/adapter/api/server.js',
+      ]
 
 volumes:
   pgdata:

@@ -1,7 +1,7 @@
-import { prisma } from "../../adapter/database/config";
+import { prisma } from '../../adapter/database/config';
 
 async function generateSlug(size: number) {
-  const { nanoid, customAlphabet } = await import("nanoid");
+  const { nanoid, customAlphabet } = await import('nanoid');
   const nanoId = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', size);
   return nanoId();
 }
